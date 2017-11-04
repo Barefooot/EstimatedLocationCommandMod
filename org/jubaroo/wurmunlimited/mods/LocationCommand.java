@@ -5,7 +5,7 @@ import com.wurmonline.server.creatures.Creature;
 import org.gotti.wurmunlimited.modloader.interfaces.PlayerMessageListener;
 import org.gotti.wurmunlimited.modloader.interfaces.WurmServerMod;
 
-public abstract class LocationCommand implements WurmServerMod, PlayerMessageListener {
+public class LocationCommand implements WurmServerMod, PlayerMessageListener {
 
     @Override
     public void preInit() {
@@ -15,6 +15,7 @@ public abstract class LocationCommand implements WurmServerMod, PlayerMessageLis
         chat.sendNormalServerMessage("That tile is at " + tilex + ", " + tiley + ", are you on the surface? =" + performer.isOnSurface());
     }
 
+    @Override
     public boolean onPlayerMessage(Communicator chat, String message, final Creature performer, final int tilex, final int tiley) {
         if (message.startsWith("/location")) {
             handleSlashMessageLocation(chat, performer, tilex, tiley);
