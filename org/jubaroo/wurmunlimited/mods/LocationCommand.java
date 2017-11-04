@@ -11,13 +11,15 @@ public abstract class LocationCommand implements WurmServerMod, PlayerMessageLis
     public void preInit() {
     }
 
-    public boolean onPlayerMessage (Communicator chat, String message, final Creature performer, final int tilex, final int tiley, final short action) {
-        if (message.startsWith("/location")) {
-            switch (action) {
-            }
-            chat.sendNormalServerMessage("That tile is at " + tilex + ", " + tiley + ", are you on the surface? =" + performer.isOnSurface());
-        }
+    public static void handleSlashMessageLocation(Communicator chat, final Creature performer, final int tilex, final int tiley) {
+        chat.sendNormalServerMessage("That tile is at " + tilex + ", " + tiley + ", are you on the surface? =" + performer.isOnSurface());
+    }
 
-        return true;
+    public boolean onPlayerMessage(Communicator chat, String message, final Creature performer, final int tilex, final int tiley) {
+        if (message.startsWith("/location")) {
+            handleSlashMessageLocation(chat, performer, tilex, tiley);
+            return true;
+        }
+        return false;
     }
 }
